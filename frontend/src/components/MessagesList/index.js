@@ -29,7 +29,7 @@ import {
 import MarkdownWrapper from "../MarkdownWrapper";
 import ModalImageCors from "../ModalImageCors";
 import MessageOptionsMenu from "../MessageOptionsMenu";
-import whatsBackground from "../../assets/wa-background.png";
+import whatsBackground from "../../assets/wa-background.jpg";
 import whatsBackgroundDark from "../../assets/wa-background-dark.png";
 
 import api from "../../services/api";

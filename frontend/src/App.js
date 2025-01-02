@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 
+import "./global.css";
 import "react-toastify/dist/ReactToastify.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 
@@ -15,7 +16,7 @@ import { getBackendURL } from "./services/config";
 import Routes from "./routes";
 
 const queryClient = new QueryClient();
-const defaultLogoLight = "/vector/logo.svg";
+const defaultLogoLight = '/images/logo.png';
 const defaultLogoDark = "/vector/logo-dark.svg";
 const defaultLogoFavicon = "/vector/favicon.svg";
 
@@ -25,7 +26,7 @@ const App = () => {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   const preferredTheme = window.localStorage.getItem("preferredTheme");
   const [mode, setMode] = useState(preferredTheme ? preferredTheme : prefersDarkMode ? "dark" : "light");
-  const [primaryColorLight, setPrimaryColorLight] = useState("#888");
+  const [primaryColorLight, setPrimaryColorLight] = useState("#FF914D");
   const [primaryColorDark, setPrimaryColorDark] = useState("#888");
   const [appLogoLight, setAppLogoLight] = useState("");
   const [appLogoDark, setAppLogoDark] = useState("");
@@ -105,6 +106,7 @@ const App = () => {
         options: mode === "light" ? "#fafafa" : "#666",
         fontecor: mode === "light" ? primaryColorLight : primaryColorDark,
         fancyBackground: mode === "light" ? "#fafafa" : "#333",
+          menuBackground: mode === "light" ? "#000000" : "#0000000",
         bordabox: mode === "light" ? "#eee" : "#333",
         newmessagebox: mode === "light" ? "#eee" : "#333",
         inputdigita: mode === "light" ? "#fff" : "#666",
@@ -160,7 +162,7 @@ const App = () => {
 
   useEffect(() => {
     getPublicSetting("primaryColorLight")
-      .then((color) => { setPrimaryColorLight(color || "#0000FF") })
+      .then((color) => { setPrimaryColorLight(color || "#FF914D") })
       .catch((error) => { console.log("Error reading setting", error); });
     getPublicSetting("primaryColorDark")
       .then((color) => { setPrimaryColorDark(color || "#39ACE7") })

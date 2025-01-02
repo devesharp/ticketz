@@ -25,7 +25,7 @@ import { has, isObject } from "lodash";
 
 import { AuthContext } from "../../context/Auth/AuthContext";
 import withWidth, { isWidthUp } from "@material-ui/core/withWidth";
-import whatsBackground from "../../assets/wa-background.png"
+import whatsBackground from "../../assets/wa-background.jpg"
 import whatsBackgroundDark from "../../assets/wa-background-dark.png";
 
 import { i18n } from "../../translate/i18n";
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     flex: 1,
     padding: theme.spacing(2),
-    height: `calc(100% - 48px)`,
+    height: `calc(100% - 000px)`,
     overflowY: "hidden",
     border: "1px solid rgba(0, 0, 0, 0.12)",
     backgroundImage: theme.mode === 'light' ? `url(${whatsBackground})` : `url(${whatsBackgroundDark})`,

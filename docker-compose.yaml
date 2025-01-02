@@ -1,0 +1,45 @@
+networks:
+  ticketz:
+
+volumes:
+  postgres_data:
+  redis_data:
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:-ticketz}
+      - POSTGRES_DB=${POSTGRES_DB:-ticketz}
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - TZ=${TZ:-America/Sao_Paulo}
+    ports:
+      - 5432:5432
+    restart: always
+
+  redis:
+    image: redis:alpine
+    command: redis-server --appendonly yes
+    ports:
+      - 6379:6379
+    restart: always
+    volumes:
+      - redis_data:/data
+
+#  sidekick:
+#    image: ghcr.io/ticketz-oss/ticketz-sidekick:latest
+#    profiles: ["do-not-start"]
+#    env_file:
+#      - .env-backend-local
+#    restart: unless-stopped
+#    volumes:
+#      - backend_public:/backend-public
+#      - backend_private:/backend-private
+#      - ./backups:/backups
+#      - ./retrieve:/retrieve
+#    depends_on:
+#      - postgres
+#    networks:
+#      - ticketz

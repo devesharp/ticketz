@@ -1,4 +1,5 @@
 import gracefulShutdown from "http-graceful-shutdown";
+require('dotenv').config();
 import app from "./app";
 import { initIO } from "./libs/socket";
 import { logger } from "./utils/logger";
@@ -9,6 +10,7 @@ import {
   checkOpenInvoices,
   payGatewayInitialize
 } from "./services/PaymentGatewayServices/PaymentGatewayServices";
+
 
 // Environment Variable Validation
 if (!process.env.PORT) {

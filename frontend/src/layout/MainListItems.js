@@ -50,9 +50,28 @@ const gitinfo = loadJSON('/gitinfo.json');
 
 const useStyles = makeStyles((theme) => ({
   ListSubheader: {
-    height: 26,
-    marginTop: "-15px",
-    marginBottom: "-10px",
+      color: '#c2c2c2',
+      fontSize: '14px !important',
+      opacity: '0.8'
+    // height: 26,
+    // marginTop: "-15px",
+    // marginBottom: "-10px",
+  },
+    ListItemLink: {
+        color: 'white',
+        "& > .MuiListItemIcon-root": {
+        minWidth: '32px',
+            color: 'white',
+            "& > .MuiSvgIcon-root, & > .MuiBadge-root > .MuiSvgIcon-root" :{
+            width: '0.8em !important',
+            }
+    },
+          "&:hover": {
+          color: theme.palette.primary.main,
+            "& > .MuiListItemIcon-root": {
+            color: theme.palette.primary.main,
+    },
+    },
   },
 }));
 
@@ -257,7 +276,8 @@ const MainListItems = (props) => {
         }}
         no={()=>(
         <>
-          <ListSubheader 
+          <ListSubheader
+          className={classes.ListSubheader}
           hidden={!drawerOpen}
         style={{
           position:"relative",
@@ -272,36 +292,43 @@ const MainListItems = (props) => {
           <>
             
             <ListItemLink
+                className={classes.ListItemLink}
               to="/tickets"
               primary={i18n.t("mainDrawer.listItems.tickets")}
               icon={<WhatsAppIcon />}
             />
       <ListItemLink
+          className={classes.ListItemLink}
         to="/todolist"
         primary={i18n.t("Tarefas")}
         icon={<BorderColorIcon />}
       />
             <ListItemLink
+                className={classes.ListItemLink}
               to="/quick-messages"
               primary={i18n.t("mainDrawer.listItems.quickMessages")}
               icon={<FlashOnIcon />}
             />
             <ListItemLink
+                className={classes.ListItemLink}
               to="/contacts"
               primary={i18n.t("mainDrawer.listItems.contacts")}
               icon={<ContactPhoneOutlinedIcon />}
             />
             <ListItemLink
+                className={classes.ListItemLink}
               to="/schedules"
               primary={i18n.t("mainDrawer.listItems.schedules")}
               icon={<EventIcon />}
             />
             <ListItemLink
+                className={classes.ListItemLink}
               to="/tags"
               primary={i18n.t("mainDrawer.listItems.tags")}
               icon={<LocalOfferIcon />}
             />
             <ListItemLink
+                className={classes.ListItemLink}
               to="/chats"
               primary={i18n.t("mainDrawer.listItems.chats")}
               icon={
@@ -311,6 +338,7 @@ const MainListItems = (props) => {
               }
             />
             <ListItemLink
+                className={classes.ListItemLink}
               to="/helps"
               primary={i18n.t("mainDrawer.listItems.helps")}
               icon={<HelpOutlineIcon />}
@@ -326,7 +354,8 @@ const MainListItems = (props) => {
         yes={()=>(
           <>
             <Divider/>
-            <ListSubheader 
+            <ListSubheader
+                className={classes.ListSubheader}
             hidden={!drawerOpen}
             style={{
               position:"relative",
@@ -339,6 +368,7 @@ const MainListItems = (props) => {
               {i18n.t("mainDrawer.listItems.management")}
             </ListSubheader>
             <ListItemLink
+                className={classes.ListItemLink}
             small
             to="/"
             primary="Dashboard"
@@ -353,7 +383,8 @@ const MainListItems = (props) => {
         yes={() => (
           <>
             <Divider />
-            <ListSubheader 
+            <ListSubheader
+            className={classes.ListSubheader}
             hidden={!drawerOpen}
             style={{
               position:"relative",
@@ -421,12 +452,14 @@ const MainListItems = (props) => {
             )}
             {user.super && (
               <ListItemLink
+                  className={classes.ListItemLink}
                 to="/announcements"
                 primary={i18n.t("mainDrawer.listItems.annoucements")}
                 icon={<AnnouncementIcon />}
               />
             )}
             <ListItemLink
+                className={classes.ListItemLink}
               to="/connections"
               primary={i18n.t("mainDrawer.listItems.connections")}
               icon={
@@ -436,38 +469,43 @@ const MainListItems = (props) => {
               }
             />
             <ListItemLink
+                className={classes.ListItemLink}
               to="/queues"
               primary={i18n.t("mainDrawer.listItems.queues")}
               icon={<AccountTreeOutlinedIcon />}
             />
             <ListItemLink
+                className={classes.ListItemLink}
               to="/users"
               primary={i18n.t("mainDrawer.listItems.users")}
               icon={<PeopleAltOutlinedIcon />}
             />
             <ListItemLink
+                className={classes.ListItemLink}
               to="/messages-api"
               primary={i18n.t("mainDrawer.listItems.messagesAPI")}
               icon={<CodeRoundedIcon />}
             />
              <ListItemLink
+                 className={classes.ListItemLink}
                 to="/financeiro"
                 primary={i18n.t("mainDrawer.listItems.financeiro")}
                 icon={<LocalAtmIcon />}
               />
 
             <ListItemLink
+                className={classes.ListItemLink}
               to="/settings"
               primary={i18n.t("mainDrawer.listItems.settings")}
               icon={<SettingsOutlinedIcon />}
             />
             
-              <Divider />
-              <Typography style={{ fontSize: "12px", padding: "10px", textAlign: "right", fontWeight: "bold" }}>
-                {`${gitinfo.tagName || gitinfo.branchName + " " + gitinfo.commitHash }`} 
-                &nbsp;/&nbsp;
-                {`${gitinfo.buildTimestamp }`}
-              </Typography>
+              {/*<Divider />*/}
+              {/*<Typography style={{ fontSize: "12px", padding: "10px", textAlign: "right", fontWeight: "bold" }}>*/}
+              {/*  {`${gitinfo.tagName || gitinfo.branchName + " " + gitinfo.commitHash }`} */}
+              {/*  &nbsp;/&nbsp;*/}
+              {/*  {`${gitinfo.buildTimestamp }`}*/}
+              {/*</Typography>*/}
             
           </>
         )}

@@ -51,13 +51,13 @@ import OnlyForSuperUser from "../components/OnlyForSuperUser";
 
 
 
-const drawerWidth = 240;
+const drawerWidth = 290;
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     height: "100vh",
-    backgroundColor: theme.palette.fancyBackground,
+    backgroundColor: theme.palette.fancyBackground + ' !important',
     '& .MuiButton-outlinedPrimary': {
       color: theme.palette.primary,
       border: theme.mode === 'light' ? '1px solid rgba(0 124 102)' : '1px solid rgba(255, 255, 255, 0.5)',
@@ -72,13 +72,14 @@ const useStyles = makeStyles((theme) => ({
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
     color: theme.palette.dark.main,
-    background: theme.palette.barraSuperior,
+    // background: theme.palette.barraSuperior,
   },
   toolbarIcon: {
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    minHeight: "48px",
+    minHeight: "000px",
+    padding: '15px 0px'
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -113,6 +114,7 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     whiteSpace: "nowrap",
     width: drawerWidth,
+    backgroundColor: theme.palette.menuBackground,
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -133,7 +135,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   appBarSpacer: {
-    minHeight: "48px",
+    minHeight: "000px",
   },
   content: {
     flex: 1,
@@ -163,6 +165,7 @@ const useStyles = makeStyles((theme) => ({
     width: "192px",
     maxHeight: "72px",
     logo: theme.logo,
+    margin: 'auto',
     content: `url("${theme.calculatedLogo()}")`
   },
   hideLogo: {
@@ -372,11 +375,11 @@ const LoggedInLayout = ({ children, themeToggle }) => {
             <ChevronLeftIcon />
           </IconButton>
         </div>
-        <Divider />
+        {/*<Divider />*/}
         <List className={classes.containerWithScroll}>
           <MainListItems drawerClose={drawerClose} drawerOpen={drawerOpen} collapsed={!drawerOpen} />
         </List>
-        <Divider />
+        {/*<Divider />*/}
       </Drawer>
       <UserModal
         open={userModalOpen}
@@ -387,136 +390,136 @@ const LoggedInLayout = ({ children, themeToggle }) => {
         open={aboutModalOpen}
         onClose={() => setAboutModalOpen(false)}
       />
-      <AppBar
-        position="absolute"
-        className={clsx(classes.appBar, drawerOpen && classes.appBarShift)}
-        color="primary"
-      >
-        <Toolbar variant="dense" className={classes.toolbar}>
-          <IconButton
-            edge="start"
-            variant="contained"
-            aria-label="open drawer"
-            onClick={() => setDrawerOpen(!drawerOpen)}
-            className={clsx(
-              classes.menuButton,
-              drawerOpen && classes.menuButtonHidden
-            )}
-          >
-            <MenuIcon />
-          </IconButton>
+      {/*<AppBar*/}
+      {/*  position="absolute"*/}
+      {/*  className={clsx(classes.appBar, drawerOpen && classes.appBarShift)}*/}
+      {/*  color="primary"*/}
+      {/*>*/}
+      {/*  <Toolbar variant="dense" className={classes.toolbar}>*/}
+      {/*    <IconButton*/}
+      {/*      edge="start"*/}
+      {/*      variant="contained"*/}
+      {/*      aria-label="open drawer"*/}
+      {/*      onClick={() => setDrawerOpen(!drawerOpen)}*/}
+      {/*      className={clsx(*/}
+      {/*        classes.menuButton,*/}
+      {/*        drawerOpen && classes.menuButtonHidden*/}
+      {/*      )}*/}
+      {/*    >*/}
+      {/*      <MenuIcon />*/}
+      {/*    </IconButton>*/}
 
-          <Typography
-            component="h2"
-            variant="h6"
-            color="inherit"
-            noWrap
-            className={classes.title}
-          >
-             {greaterThenSm && user?.profile === "admin" && user?.company?.dueDate ? (
-              <>
-                {i18n.t("settings.WelcomeGreeting.greetings")} <b>{user.name}</b>, {i18n.t("settings.WelcomeGreeting.welcome")} <b>{user?.company?.name}</b>! ({i18n.t("settings.WelcomeGreeting.expirationTime")} {dateToClient(user?.company?.dueDate)})
-              </>
-            ) : (
-              <>
-                {i18n.t("settings.WelcomeGreeting.greetings")} <b>{user.name}</b>, {i18n.t("settings.WelcomeGreeting.welcome")} <b>{user?.company?.name}</b>! ({i18n.t("settings.WelcomeGreeting.expirationTime")} {dateToClient(user?.company?.dueDate)})
-              </>
-            )}
-          </Typography>
+      {/*    <Typography*/}
+      {/*      component="h2"*/}
+      {/*      variant="h6"*/}
+      {/*      color="inherit"*/}
+      {/*      noWrap*/}
+      {/*      className={classes.title}*/}
+      {/*    >*/}
+      {/*       {greaterThenSm && user?.profile === "admin" && user?.company?.dueDate ? (*/}
+      {/*        <>*/}
+      {/*          {i18n.t("settings.WelcomeGreeting.greetings")} <b>{user.name}</b>, {i18n.t("settings.WelcomeGreeting.welcome")} <b>{user?.company?.name}</b>! ({i18n.t("settings.WelcomeGreeting.expirationTime")} {dateToClient(user?.company?.dueDate)})*/}
+      {/*        </>*/}
+      {/*      ) : (*/}
+      {/*        <>*/}
+      {/*          {i18n.t("settings.WelcomeGreeting.greetings")} <b>{user.name}</b>, {i18n.t("settings.WelcomeGreeting.welcome")} <b>{user?.company?.name}</b>! ({i18n.t("settings.WelcomeGreeting.expirationTime")} {dateToClient(user?.company?.dueDate)})*/}
+      {/*        </>*/}
+      {/*      )}*/}
+      {/*    </Typography>*/}
 
-          <NotificationsVolume
-            setVolume={setVolume}
-            volume={volume}
-          />
+      {/*    <NotificationsVolume*/}
+      {/*      setVolume={setVolume}*/}
+      {/*      volume={volume}*/}
+      {/*    />*/}
 
-          {user.id && <NotificationsPopOver volume={volume} />}
+      {/*    {user.id && <NotificationsPopOver volume={volume} />}*/}
 
-          <AnnouncementsPopover />
+      {/*    <AnnouncementsPopover />*/}
 
-          <ChatPopover />
+      {/*    <ChatPopover />*/}
 
-          <div>
-            <Menu
-              id="language-appbar"
-              anchorEl={anchorEl}
-              getContentAnchorEl={null}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "right",
-              }}
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={languageOpen}
-              onClose={handleCloseLanguageMenu}
-            >
-            {
-              Object.keys(messages).map((m) => (
-                <MenuItem onClick={() => handleChooseLanguage(m)}>
-                  {messages[m].translations.mainDrawer.appBar.i18n.language}
-                </MenuItem>
-              ))
-            }
-            </Menu>
-          </div>
+      {/*    <div>*/}
+      {/*      <Menu*/}
+      {/*        id="language-appbar"*/}
+      {/*        anchorEl={anchorEl}*/}
+      {/*        getContentAnchorEl={null}*/}
+      {/*        anchorOrigin={{*/}
+      {/*          vertical: "bottom",*/}
+      {/*          horizontal: "right",*/}
+      {/*        }}*/}
+      {/*        transformOrigin={{*/}
+      {/*          vertical: "top",*/}
+      {/*          horizontal: "right",*/}
+      {/*        }}*/}
+      {/*        open={languageOpen}*/}
+      {/*        onClose={handleCloseLanguageMenu}*/}
+      {/*      >*/}
+      {/*      {*/}
+      {/*        Object.keys(messages).map((m) => (*/}
+      {/*          <MenuItem onClick={() => handleChooseLanguage(m)}>*/}
+      {/*            {messages[m].translations.mainDrawer.appBar.i18n.language}*/}
+      {/*          </MenuItem>*/}
+      {/*        ))*/}
+      {/*      }*/}
+      {/*      </Menu>*/}
+      {/*    </div>*/}
 
 
-          <div>
-            <IconButton
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleProfileMenu}
-              variant="contained"
-              style={{ color: "white" }}
-            >
-              <AccountCircle />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorEl}
-              getContentAnchorEl={null}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "right",
-              }}
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={menuOpen}
-              onClose={handleCloseProfileMenu}
-            >
-              <MenuItem onClick={handleOpenUserModal}>
-                {i18n.t("mainDrawer.appBar.user.profile")}
-              </MenuItem>
-              <MenuItem onClick={toggleColorMode}>
-                {theme.mode === 'dark' ? i18n.t("mainDrawer.appBar.user.lightmode") : i18n.t("mainDrawer.appBar.user.darkmode")}
-              </MenuItem>
-              <NestedMenuItem
-                label={i18n.t("mainDrawer.appBar.user.language")}
-                parentMenuOpen={menuOpen}
-              >
-                {
-                  Object.keys(messages).map((m) => (
-                    <MenuItem onClick={() => handleChooseLanguage(m)}>
-                      {messages[m].translations.mainDrawer.appBar.i18n.language}
-                    </MenuItem>
-                  ))
-                }
-              </NestedMenuItem>
-              <MenuItem onClick={handleOpenAboutModal}>
-                {i18n.t("about.aboutthe")} {currentUser?.super ? "ticketz" : theme.appName}
-              </MenuItem>
-              <MenuItem onClick={handleClickLogout}>
-                {i18n.t("mainDrawer.appBar.user.logout")}
-              </MenuItem>
-            </Menu>
-          </div>
+      {/*    <div>*/}
+      {/*      <IconButton*/}
+      {/*        aria-label="account of current user"*/}
+      {/*        aria-controls="menu-appbar"*/}
+      {/*        aria-haspopup="true"*/}
+      {/*        onClick={handleProfileMenu}*/}
+      {/*        variant="contained"*/}
+      {/*        style={{ color: "white" }}*/}
+      {/*      >*/}
+      {/*        <AccountCircle />*/}
+      {/*      </IconButton>*/}
+      {/*      <Menu*/}
+      {/*        id="menu-appbar"*/}
+      {/*        anchorEl={anchorEl}*/}
+      {/*        getContentAnchorEl={null}*/}
+      {/*        anchorOrigin={{*/}
+      {/*          vertical: "bottom",*/}
+      {/*          horizontal: "right",*/}
+      {/*        }}*/}
+      {/*        transformOrigin={{*/}
+      {/*          vertical: "top",*/}
+      {/*          horizontal: "right",*/}
+      {/*        }}*/}
+      {/*        open={menuOpen}*/}
+      {/*        onClose={handleCloseProfileMenu}*/}
+      {/*      >*/}
+      {/*        <MenuItem onClick={handleOpenUserModal}>*/}
+      {/*          {i18n.t("mainDrawer.appBar.user.profile")}*/}
+      {/*        </MenuItem>*/}
+      {/*        <MenuItem onClick={toggleColorMode}>*/}
+      {/*          {theme.mode === 'dark' ? i18n.t("mainDrawer.appBar.user.lightmode") : i18n.t("mainDrawer.appBar.user.darkmode")}*/}
+      {/*        </MenuItem>*/}
+      {/*        <NestedMenuItem*/}
+      {/*          label={i18n.t("mainDrawer.appBar.user.language")}*/}
+      {/*          parentMenuOpen={menuOpen}*/}
+      {/*        >*/}
+      {/*          {*/}
+      {/*            Object.keys(messages).map((m) => (*/}
+      {/*              <MenuItem onClick={() => handleChooseLanguage(m)}>*/}
+      {/*                {messages[m].translations.mainDrawer.appBar.i18n.language}*/}
+      {/*              </MenuItem>*/}
+      {/*            ))*/}
+      {/*          }*/}
+      {/*        </NestedMenuItem>*/}
+      {/*        <MenuItem onClick={handleOpenAboutModal}>*/}
+      {/*          {i18n.t("about.aboutthe")} {currentUser?.super ? "ticketz" : theme.appName}*/}
+      {/*        </MenuItem>*/}
+      {/*        <MenuItem onClick={handleClickLogout}>*/}
+      {/*          {i18n.t("mainDrawer.appBar.user.logout")}*/}
+      {/*        </MenuItem>*/}
+      {/*      </Menu>*/}
+      {/*    </div>*/}
 
-        </Toolbar>
-      </AppBar>
+      {/*  </Toolbar>*/}
+      {/*</AppBar>*/}
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <OnlyForSuperUser

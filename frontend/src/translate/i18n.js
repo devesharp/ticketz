@@ -11,7 +11,7 @@ i18n.use(LanguageDetector).init({
     caches: ['localStorage'],
   },
   defaultNS: ["translations"],
-  fallbackLng: "en",
+  fallbackLng: "pt",
   ns: ["translations"],
   resources: messages,
 });
