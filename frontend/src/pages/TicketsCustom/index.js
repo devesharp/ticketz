@@ -15,6 +15,7 @@ const useStyles = makeStyles(theme => ({
 		flex: 1,
 		height: `calc(100% - 000px)`,
 		overflowY: "hidden",
+		background: theme.palette.text.fancyBackground
 	},
 
 	chatPapper: {
@@ -35,6 +36,7 @@ const useStyles = makeStyles(theme => ({
 		flexDirection: "column",
 	},
 	welcomeMsg: {
+		background: theme.palette.backgroundWebsite,
 		display: "flex",
 		justifyContent: "space-evenly",
 		alignItems: "center",
@@ -60,9 +62,9 @@ const TicketsCustom = () => {
 								<Ticket />
 							</>
 						) : (
-							<Paper square variant="outlined" className={classes.welcomeMsg}>
+							<div square variant="outlined" className={classes.welcomeMsg}>
 								<span>{i18n.t("chat.noTicketMessage")}</span>
-							</Paper>
+							</div>
 						)}
 					</Grid>
 				</Grid>

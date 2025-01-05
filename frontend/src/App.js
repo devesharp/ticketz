@@ -96,6 +96,7 @@ const App = () => {
       },
       palette: {
         type: mode,
+        backgroundWebsite: mode === "light" ? "#ffffff" : "#666",
         primary: { main: mode === "light" ? primaryColorLight : primaryColorDark },
         textPrimary: mode === "light" ? primaryColorLight : primaryColorDark,
         borderPrimary: mode === "light" ? primaryColorLight : primaryColorDark,
@@ -105,7 +106,7 @@ const App = () => {
         optionsBackground: mode === "light" ? "#fafafa" : "#333",
         options: mode === "light" ? "#fafafa" : "#666",
         fontecor: mode === "light" ? primaryColorLight : primaryColorDark,
-        fancyBackground: mode === "light" ? "#fafafa" : "#333",
+        fancyBackground: mode === "light" ? "#eeeeee" : "#333",
           menuBackground: mode === "light" ? "#000000" : "#0000000",
         bordabox: mode === "light" ? "#eee" : "#333",
         newmessagebox: mode === "light" ? "#eee" : "#333",

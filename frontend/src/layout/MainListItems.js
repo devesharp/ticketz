@@ -21,6 +21,7 @@ import CodeRoundedIcon from "@material-ui/icons/CodeRounded";
 import EventIcon from "@material-ui/icons/Event";
 import InfoIcon from "@material-ui/icons/Info";
 import DarkMode from "../components/DarkMode";
+import { TbMessageCircle } from "react-icons/tb";
 
 import LocalOfferIcon from "@material-ui/icons/LocalOffer";
 import EventAvailableIcon from "@material-ui/icons/EventAvailable";
@@ -295,7 +296,7 @@ const MainListItems = (props) => {
                 className={classes.ListItemLink}
               to="/tickets"
               primary={i18n.t("mainDrawer.listItems.tickets")}
-              icon={<WhatsAppIcon />}
+              icon={<TbMessageCircle size={20} />}
             />
       <ListItemLink
           className={classes.ListItemLink}

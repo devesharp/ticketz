@@ -22,7 +22,7 @@ import { i18n } from "../../translate/i18n";
 import { AuthContext } from "../../context/Auth/AuthContext";
 import { Can } from "../Can";
 import TicketsQueueSelect from "../TicketsQueueSelect";
-import { Button } from "@material-ui/core";
+import {Button, Typography} from "@material-ui/core";
 import { TagsFilter } from "../TagsFilter";
 import { UsersFilter } from "../UsersFilter";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -31,7 +31,7 @@ import api from "../../services/api";
 import useSettings from "../../hooks/useSettings";
 
 const useStyles = makeStyles((theme) => ({
-  ticketsWrapper: {
+  ticketsRoot: {
     position: "relative",
     display: "flex",
     height: "100%",
@@ -39,10 +39,22 @@ const useStyles = makeStyles((theme) => ({
     overflow: "hidden",
     borderTopRightRadius: 0,
     borderBottomRightRadius: 0,
+    borderRight: "1px solid #e0e0e0",
+  },
+
+  ticketsWrapper: {
+    position: "relative",
+    display: "flex",
+    height: "100%",
+    flexDirection: "column",
+    // overflow: "hidden",
+    borderTopRightRadius: 0,
+    borderBottomRightRadius: 0,
   },
 
   tabsHeader: {
     flex: "none",
+    padding: 0,
    // backgroundColor: "#eee",
   },
 
@@ -50,6 +62,7 @@ const useStyles = makeStyles((theme) => ({
     alignSelf: "center",
     marginLeft: "auto",
     padding: 8,
+    paddingLeft: 15,
   },
 
   tabWithGroups: {
@@ -59,7 +72,48 @@ const useStyles = makeStyles((theme) => ({
 
   tab: {
     minWidth: 120,
-    width: 120,
+    fontSize: 12,
+    fontWeight: 700,
+    // width: 120,
+    minHeight: 0
+  },
+
+  tabSelected: {
+    // background: theme.palette.primary.main,
+    // color: 'white !important',
+    // borderRadius: 30
+  },
+
+  tabsGroup: {
+    borderBottom: "1px solid #e0e0e0",
+    // background: '#eeeeee',
+    padding: 0,
+    minHeight: 0,
+    // borderRadius: 30
+  },
+
+  tabsSubGroup: {
+    minHeight: 0,
+    padding: 10
+  },
+  tabSub: {
+    marginBottom: 5,
+    padding: '5px 16px',
+    background: '#eeeeee',
+    borderRadius: 100,
+    marginRight: 5,
+    fontSize: 12,
+    fontWeight: 600,
+    margin: 0,
+    minWidth: 0,
+    minHeight: 0
+  },
+  tabSubSelected: {
+    background: theme.palette.primary.main,
+    color: 'white !important',
+  },
+  tabSubWrapper: {
+    // width: 0,
   },
 
   ticketOptionsBox: {
@@ -93,7 +147,16 @@ const useStyles = makeStyles((theme) => ({
   },
 
   badge: {
-    right: "-10px",
+    '& > .MuiBadge-badge': {
+      position: 'static',
+      top: 0,
+      bottom: 0,
+      transform: 'none',
+      marginLeft: 4
+    },
+    '& > .MuiBadge-invisible': {
+      display: 'none',
+    }
   },
   show: {
     display: "block",
@@ -198,7 +261,7 @@ const TicketsManagerTabs = () => {
   };
 
   return (
-    <Paper elevation={0} variant="outlined" className={classes.ticketsWrapper}>
+    <Paper elevation={0} variant="none" className={classes.ticketsRoot}>
       <NewTicketModal
         modalOpen={newTicketModalOpen}
         onClose={(ticket) => {
@@ -206,7 +269,13 @@ const TicketsManagerTabs = () => {
           handleCloseOrOpenTicket(ticket);
         }}
       />
-      <Paper elevation={0} square className={classes.tabsHeader}>
+      <Paper elevation={0} square>
+        <div className={classes.tabsHeader}>
+        <Typography variant="h6" className={classes.settingsIcon}>
+          {i18n.t("tickets.title")}
+        </Typography>
+        </div>
+
         <Tabs
           value={tab}
           onChange={handleChangeTab}
@@ -214,18 +283,17 @@ const TicketsManagerTabs = () => {
           indicatorColor="primary"
           textColor="primary"
           aria-label="icon label tabs example"
+          className={classes.tabsGroup}
         >
           <Tab
             value={"open"}
-            icon={<MoveToInboxIcon />}
             label={i18n.t("tickets.tabs.open.title")}
-            classes={{ root: showTabGroups ? classes.tabWithGroups : classes.tab }}
+            classes={{ root: showTabGroups ? classes.tabWithGroups : classes.tab, selected: classes.tabSelected,  }}
           />
 
           { showTabGroups && (
             <Tab
               value={"groups"}
-              icon={<FontAwesomeIcon className={classes.icon24} icon={faPeopleGroup} />}
               label={i18n.t("tickets.tabs.groups.title")}
               classes={{ root: classes.tabWithGroups }}
             />
@@ -233,16 +301,14 @@ const TicketsManagerTabs = () => {
 
           <Tab
             value={"closed"}
-            icon={<CheckBoxIcon />}
             label={i18n.t("tickets.tabs.closed.title")}
-            classes={{ root: showTabGroups ? classes.tabWithGroups : classes.tab }}
+            classes={{ root: showTabGroups ? classes.tabWithGroups : classes.tab, selected: classes.tabSelected,  }}
           />
 
           <Tab
             value={"search"}
-            icon={<SearchIcon />}
             label={i18n.t("tickets.tabs.search.title")}
-            classes={{ root: showTabGroups ? classes.tabWithGroups : classes.tab }}
+            classes={{ root: showTabGroups ? classes.tabWithGroups : classes.tab, selected: classes.tabSelected,  }}
           />
         </Tabs>
       </Paper>
@@ -303,20 +369,22 @@ const TicketsManagerTabs = () => {
         <Tabs
           value={tabOpen}
           onChange={handleChangeTabOpen}
-          indicatorColor="primary"
+          indicatorColor="transparent"
           textColor="primary"
-          variant="fullWidth"
+          className={classes.tabsSubGroup}
         >
           <Tab
             label={
               <Badge
                 className={classes.badge}
+
                 badgeContent={openCount}
                 color="primary"
               >
                 {i18n.t("ticketsList.assignedHeader")}
               </Badge>
             }
+            classes={{ root: classes.tabSub, selected: classes.tabSubSelected, wrapper: classes.tabSubWrapper  }}
             value={"open"}
           />
           <Tab
@@ -329,6 +397,7 @@ const TicketsManagerTabs = () => {
                 {i18n.t("ticketsList.pendingHeader")}
               </Badge>
             }
+            classes={{ root: classes.tabSub, selected: classes.tabSubSelected, wrapper: classes.tabSubWrapper  }}
             value={"pending"}
           />
         </Tabs>

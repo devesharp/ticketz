@@ -288,6 +288,7 @@ const messages = {
         notification: {
           message: "Mensagem de",
         },
+        title: 'Atendimentos',
         tabs: {
           open: { title: "Abertas" },
           closed: { title: "Resolvidos" },
