@@ -1,6 +1,6 @@
 {
-  "BACKEND_PROTOCOL": "http",
-  "BACKEND_HOST": "localhost",
-  "BACKEND_PORT": "3000",
+  "BACKEND_PROTOCOL": "https",
+  "BACKEND_HOST": "backtest.centralcit.com.br",
+  "BACKEND_PORT": "",
   "LOG_LEVEL": "debug"
 }
