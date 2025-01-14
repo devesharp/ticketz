@@ -5,6 +5,8 @@ let config = loadJSON("/config.json");
 
 if (!config && ["localhost", "127.0.0.1"].includes(window.location.hostname)) {
   config = loadJSON("/config-dev.json");
+
+  console.log(config)
   if (!config) {
     config = {
       "BACKEND_PROTOCOL": "http",

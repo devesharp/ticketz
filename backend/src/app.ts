@@ -13,8 +13,6 @@ import routes from "./routes";
 import { logger } from "./utils/logger";
 import { messageQueue, sendScheduledMessages } from "./queues";
 
-
-
 Sentry.init({ dsn: process.env.SENTRY_DSN });
 
 const app = express();
@@ -27,9 +25,11 @@ app.set("queues", {
 app.use(
   cors({
     credentials: true,
-    origin: process.env.FRONTEND_URL
+    origin: 'http://localhost:3001',
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE"
   })
 );
+
 app.use(cookieParser());
 app.use(express.json());
 app.use(Sentry.Handlers.requestHandler());

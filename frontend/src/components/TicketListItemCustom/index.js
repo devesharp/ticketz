@@ -286,7 +286,11 @@ const TicketListItemCustom = ({ ticket, setTabOpen, groupActionButtons }) => {
                   borderRadius: 50,
                   position: 'absolute',
                   right: 0,
-                  top: -8
+                  top: -8,
+                  border: '1px solid #E4E7ED',
+                  background: 'transparent',
+                  color: '#5D6165',
+                  borderRadius: 5,
                 }}
               />
             </Tooltip>
@@ -300,14 +304,15 @@ const TicketListItemCustom = ({ ticket, setTabOpen, groupActionButtons }) => {
                 }}
                 fontSize="small"
                 style={{
+                  border: '1px solid #E4E7ED',
                   padding: 2,
                   height: 23,
                   width: 23,
                   fontSize: 12,
-                  color: '#fff',
+                  color: '#5D6165',
                   cursor: "pointer",
-                  backgroundColor: blue[700],
-                  borderRadius: 50,
+                  // backgroundColor: blue[700],
+                  borderRadius: 5,
                   position: 'absolute',
                   right: 28,
                   top: -8
@@ -384,6 +389,10 @@ const TicketListItemCustom = ({ ticket, setTabOpen, groupActionButtons }) => {
                   borderRadius: 50,
                   top: -8,
                   position: 'absolute',
+                  border: '1px solid #E4E7ED',
+                  background: 'transparent',
+                  color: '#5D6165',
+                  borderRadius: 5,
                 }}
               />
             </Tooltip>
@@ -408,6 +417,10 @@ const TicketListItemCustom = ({ ticket, setTabOpen, groupActionButtons }) => {
                   right: 49,
                   top: -8,
                   position: 'absolute',
+                  border: '1px solid #E4E7ED',
+                  background: 'transparent',
+                  color: '#5D6165',
+                  borderRadius: 5,
                 }}
               />
             </Tooltip>
@@ -430,6 +443,10 @@ const TicketListItemCustom = ({ ticket, setTabOpen, groupActionButtons }) => {
                   right: 25,
                   top: -8,
                   position: 'absolute',
+                  border: '1px solid #E4E7ED',
+                  background: 'transparent',
+                  color: '#5D6165',
+                  borderRadius: 5,
                 }}
               />
             </Tooltip>
@@ -455,6 +472,10 @@ const TicketListItemCustom = ({ ticket, setTabOpen, groupActionButtons }) => {
                   right: 0,
                   top: -8,
                   position: 'absolute',
+                  border: '1px solid #E4E7ED',
+                  background: 'transparent',
+                  color: '#5D6165',
+                  borderRadius: 5,
                 }}
               />
             </Tooltip>

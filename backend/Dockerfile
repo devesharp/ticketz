@@ -6,8 +6,8 @@ FROM node:20 AS build
 WORKDIR /usr/src/app
 COPY . .
 
-RUN --mount=type=cache,target=/root/.npm \
-    npm ci && npm run build
+RUN yarn install
+RUN yarn build
 
 # Stage 2: Create the final image without source files
 FROM ghcr.io/ticketz-oss/node
@@ -27,9 +27,12 @@ ENV PORT=3000
 
 EXPOSE 3000
 
-CMD dockerize -wait tcp://${DB_HOST}:5432 -timeout 60s \
-  && npx sequelize db:migrate  --config dist/config/database.js --migrations-path dist/database/migrations \
-  && ./scripts/load-retrieved.sh /retrieve; exit_code=$? \
-  && if [ $exit_code -eq 1 ]; then npm run mark-seeds; exit 0; elif [ $exit_code -ge 100 ]; then exit 1; fi \
-  && npx sequelize db:seed:all --config dist/config/database.js --seeders-path dist/database/seeds \
-  && node dist/server.js
+CMD node dist/server.js
+
+#
+#CMD dockerize -wait tcp://${DB_HOST}:5432 -timeout 60s \
+#  && npx sequelize db:migrate  --config dist/config/database.js --migrations-path dist/database/migrations \
+#  && ./scripts/load-retrieved.sh /retrieve; exit_code=$? \
+#  && if [ $exit_code -eq 1 ]; then npm run mark-seeds; exit 0; elif [ $exit_code -ge 100 ]; then exit 1; fi \
+#  && npx sequelize db:seed:all --config dist/config/database.js --seeders-path dist/database/seeds \
+#  && node dist/server.js

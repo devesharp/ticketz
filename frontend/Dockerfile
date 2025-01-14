@@ -1,23 +1,29 @@
-FROM node:20-alpine as build-deps
+# Use the official Node.js runtime as the base image
+FROM node:20 as build
 
-WORKDIR /usr/src/app
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy package.json and package-lock.json to the working directory
+COPY package*.json ./
+
+# Install dependencies
+RUN yarn install
+
+# Copy the entire application code to the container
 COPY . .
 
-ENV NODE_OPTIONS --openssl-legacy-provider
+# Build the React app for production
+RUN yarn build
 
-RUN --mount=type=cache,target=/root/.npm \
-    npm ci && npm run build
+# Use Nginx as the production server
+FROM nginx:alpine
 
-FROM ghcr.io/ticketz-oss/nginx-alpine
+# Copy the built React app to Nginx's web server directory
+COPY --from=build /app/build /usr/share/nginx/html
 
-WORKDIR /usr/share/nginx/html
+# Expose port 80 for the Nginx server
+EXPOSE 80
 
-COPY --from=build-deps /usr/src/app/build /var/www/public
-COPY --from=build-deps /usr/src/app/node_modules/@socket.io/admin-ui/ui/dist /var/www/public/socket-admin
-COPY nginx /etc/nginx
-
-ENTRYPOINT ["dumb-init", "--"]
-CMD (echo "{" && while IFS='=' read -r name value; do \
-        printf '\t"%s": "%s"\n' "$name" "$value"; \
-    done < <(env) | sed '$!s/$/,/' && echo "}")  > /var/www/public/config.json \
-    && nginx -g "daemon off;"
+# Start Nginx when the container runs
+CMD ["nginx", "-g", "daemon off;"]

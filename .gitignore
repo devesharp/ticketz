@@ -1,4 +1,6 @@
 .docker
 .idea
+.env.backend
+.env.frontend
 *~
 /.project

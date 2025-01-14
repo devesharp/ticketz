@@ -6,10 +6,52 @@ volumes:
   redis_data:
 
 services:
+  nginx:
+      image: devesharp/nginx-certbot:latest
+      volumes:
+        - ./conf.d:/etc/nginx/conf.d
+        - ./certs:/etc/nginx/certs
+        - ./letsencrypt:/etc/letsencrypt
+      extra_hosts:
+        host: $HostIP
+      restart: always
+      ports:
+        - 80:80
+        - 443:443
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+    volumes:
+      - .docker/backend:/usr/src/app/public
+      - .env.backend:/usr/src/app/.env
+#      - backend_private:/usr/src/app/private
+    ports:
+      - 3000:3000
+#    env_file:
+#      - .env-backend-cloudflare
+    restart: always
+#    depends_on:
+#      - postgres
+#      - redis
+    networks:
+      - ticketz
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile
+    volumes:
+      - .env.frontend:/app/.env
+      - .frontend-config.json:/app/public/config-dev.json
+    ports:
+      - 3001:80
+    restart: always
+    networks:
+      - ticketz
   postgres:
     image: postgres:16-alpine
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - ./docker/postgres:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=${POSTGRES_USER:-ticketz}
       - POSTGRES_DB=${POSTGRES_DB:-ticketz}
@@ -18,6 +60,8 @@ services:
     ports:
       - 5432:5432
     restart: always
+    networks:
+      - ticketz
 
   redis:
     image: redis:alpine
@@ -27,6 +71,8 @@ services:
     restart: always
     volumes:
       - redis_data:/data
+    networks:
+      - ticketz
 
 #  sidekick:
 #    image: ghcr.io/ticketz-oss/ticketz-sidekick:latest
